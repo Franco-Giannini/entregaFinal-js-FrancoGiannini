@@ -1,0 +1,207 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+/*        HEADER        */
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    width: 100%;
+    color: orangered;
+    background-color: black;
+    padding-left: 20px;
+}
+.header h3{
+    font-family: 'Chakra Petch', sans-serif;
+}
+.barraNav{
+    padding-right: 40px;
+}
+
+.barraNav a{
+    margin: 5px 5px 5px 5px;
+    padding: 3px;
+    text-decoration: none;
+    color: orangered;
+    margin-left: 10px;
+    transition: 0.9s;
+}
+
+.barraNav a:hover {
+    background-color: orangered;
+    color: black;
+    border-radius: 9px;
+}
+
+.numero-carro{
+    padding: 10px;
+}
+
+/*    MAIN     */
+main{
+    background-color: rgb(245, 245, 245);
+    height: 550px;
+}
+
+.titulo-prin-index{
+    margin-bottom: 2rem;
+    border-bottom: 2px solid rgb(66, 66, 66);
+    width: 300px;
+}
+
+.titulo-prin{
+    width: 105px;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid rgb(66, 66, 66);
+}
+
+.contenedor-produc{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.produc-img{
+    max-width: 100%;
+    border-radius: 1rem;
+    height: 300px;
+}
+/* la imagen no cuadra bien, por eso esta clase especial para la imagen*/
+.imagen-tala{
+    width: 300px;
+}
+
+.produc-detalles{
+    background-color: rgb(199, 199, 199);
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.boton-agregar{
+    background-color: orangered;
+    color: black;
+    transition: 0.5s;
+    border: 0;
+    border-radius: 11px;
+    padding: .5rem;
+    text-transform: uppercase;
+}
+
+.boton-agregar:hover {
+    background-color: black;
+    color: orangered;
+}
+
+
+/*       FOOTER        */
+.tituloPie{
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    color: orangered;
+    background-color: black;
+    margin: 0;
+    
+}
+
+
+/*      CARRITO         */
+
+.contenedor-carrito{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.carrito-vacio{
+    padding-left: 10px;
+    font-size: 30px;
+}
+
+.productos-carrito{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.producto-carrito{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(199, 199, 199);
+    padding: 0.5rem;  
+    border-radius: 15px;
+    padding-right: 50px;
+}
+
+.carrito-img{
+    width: 4rem;
+    border-radius: 9px;
+}
+
+.carrito-eliminar{
+    border: 0;
+    background-color: transparent;
+    color: red;
+}
+
+small{
+ border-bottom: solid black 1px;
+}
+
+.carrito-acciones{
+    display: flex;
+    justify-content: space-between;
+}
+
+.carrito-acciones-derecha{
+    display: flex;
+}
+
+.carrito-total{
+    display: flex;
+    padding-right: 10px;
+}
+
+.carrito-total p{
+    padding-top: 15px;
+}
+
+.carrito-vaciar{
+    border: 0;
+    background-color: orangered;
+    color: black;
+    transition: 0.5s;
+    border-radius: 15px;
+    padding: .5rem;
+    text-transform: uppercase;
+}
+
+.carrito-vaciar:hover {
+    background-color: black;
+    color: orangered;
+}
+
+.carrito-comprar{
+    border: 0;
+    background-color: orangered;
+    color: black;
+    transition: 0.5s;
+    border-radius: 15px;
+    padding: .5rem;
+    text-transform: uppercase;
+}
+
+.carrito-comprar:hover {
+    background-color: black;
+    color: orangered;
+}
+
+
+.disabled{
+    display: none;
+}
