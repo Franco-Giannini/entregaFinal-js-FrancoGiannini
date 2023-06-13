@@ -1,44 +1,109 @@
-const productosCarrito = JSON.parse(localStorage.getItem("productos-en-carrito"));
+let productosCarrito = localStorage.getItem("carrito-productos");
+productosCarrito = JSON.parse(productosCarrito);
 
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
 const contenedorCarritoProductos = document.querySelector("#carrito-productos");
 const contenedorCarritosAcciones = document.querySelector("#carrito-acciones");
+let botonesEliminar = document.querySelectorAll(".carrito-eliminar");
+const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
+const contenedorTotal = document.querySelector("total");
+const botonComprar = document.querySelector("#carrito-acciones-comprar")
 
-if(productosCarrito) {
+function cargarProductosCarrito() {
+    if(productosCarrito && productosCarrito.length > 0) {
 
-    contenedorCarritoVacio.classList.add("disabled");
-    contenedorCarritoProductos.classList.remove("disabled");
-    contenedorCarritosAcciones.classList.remove("disabled");
+        contenedorCarritoVacio.classList.add("disabled");
+        contenedorCarritoProductos.classList.remove("disabled");
+        contenedorCarritosAcciones.classList.remove("disabled");
+    
+        contenedorCarritoProductos.innerHTML = "";
+    
+        productosCarrito.forEach(producto => {
+    
+            const div = document.createElement("div");
+            div.classList.add("producto-carrito");
+            div.innerHTML = `
+            <img class="carrito-img" src="${producto.imagen}" alt="">
+            <div class="titulos-carrito">
+                <small>titulo</small>
+                <h3>${producto.titulo}</h3>
+            </div>
+             <div class="cantidad-carrito">
+                <small>cantidad</small>
+                <p>${producto.cantidad}</p>
+            </div>
+            <div class="precio-carrito">
+                <small>precio</small>
+                <p>${producto.precio}</p>
+            </div>
+            <div class="carrito-precio">
+                <small>total</small>
+                 <p>${producto.precio * producto.cantidad}</p>
+            </div>
+            `;
+    
+            contenedorCarritoProductos.append(div);
+    
+        })
+    
+    }else{
+        contenedorCarritoVacio.classList.remove("disabled");
+        contenedorCarritoProductos.classList.add("disabled");
+        contenedorCarritosAcciones.classList.add("disabled");
+    }
+    actualizarBotonesEliminar();
+    actualizarTotal();
+}
 
-    productosCarrito.forEach(producto => {
+cargarProductosCarrito();
 
-        const div = document.createElement("div");
-        div.classList.add("producto-carrito");
-        div.innerHTML = `
-        <img class="carrito-img" src="${producto.imagen}" alt="">
-        <div class="titulos-carrito">
-            <small>titulo</small>
-            <h3>${producto.titulo}</h3>
-        </div>
-         <div class="cantidad-carrito">
-            <small>cantidad</small>
-            <p>${producto.cantidad}</p>
-        </div>
-        <div class="precio-carrito">
-            <small>precio</small>
-            <p>${producto.precio}</p>
-        </div>
-        <div class="carrito-precio">
-            <small>total</small>
-             <p>${producto.precio * producto.cantidad}</p>
-        </div>
-        <button class="carrito-eliminar" id="${producto.id}"><i class="bi bi-trash3"></i></button>
-        `;
+//habia boton para eliminar los productos pero estuve cerca de que funcione, al final lo borre y deje que se vacieel carrito nomas.
+function actualizarBotonesEliminar() {
+    botonesEliminar = document.querySelectorAll(".carrito-eliminar");
+    botonesAgregar.forEach(boton => {
+        boton.addEventListener("click", eliminarDelCarrito);
 
-        contenedorCarritoProductos.append(div);
+    });
+}
 
-    })
+function eliminarDelCarrito(e) {
+    const idBoton = e.currentTarget.id;
+    const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
 
-}else{
+    productosEnCarrito.splice(index, 0);     
+    cargarProductosCarrito();
+
+    localStorage.setItem("carrito-productos", JSON.stringify(productosCarrito));
 
 }
+
+botonVaciar.addEventListener("click", vaciarCarrito);
+
+function vaciarCarrito() {
+
+    productosCarrito.length = 0;
+    localStorage.setItem("carrito-productos", JSON.stringify(productosCarrito));
+    cargarProductosCarrito();
+
+}
+
+
+function actualizarTotal(){
+    const totalCalculado = productosCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
+    total.innerText = `$${totalCalculado}`;
+}
+
+botonComprar.addEventListener("click", comprarCarrito);
+
+function comprarCarrito() {
+
+    productosCarrito.length = 0;
+    localStorage.setItem("carrito-productos", JSON.stringify(productosCarrito));
+
+    contenedorCarritoVacio.classList.add("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritosAcciones.classList.add("disabled");
+    alert("¡Gracias por su compra!");
+}
+
+botonComprar.addEventListener("click", comprarCarrito);
